@@ -1,12 +1,13 @@
 package main
+
 import "time"
 
 func main() {
-  go helloWorld()
+	go helloWorld()
 
-  time.Sleep(time.Second)
+	time.Sleep(time.Second)
 }
 
-func helloWorld(){
-  println("Hello World!")
+func helloWorld() {
+	println("Hello World!")
 }

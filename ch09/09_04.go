@@ -2,8 +2,8 @@ package future
 
 import (
 	"errors"
-	"testing"
 	"sync"
+	"testing"
 )
 
 func TestStringOrError_Execute(t *testing.T) {

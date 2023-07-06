@@ -46,18 +46,17 @@ type Pasta struct {
 	Product
 }
 
-
 type Fridge struct {
 	Product
 }
 
-//GetPrice overrides GetPrice method of Product type
+// GetPrice overrides GetPrice method of Product type
 func (f *Fridge) GetPrice() float32 {
 	return f.Product.Price + 20
 }
 
-//Accept overrides "Accept" method from Product and implements the Visitable
-//interface
+// Accept overrides "Accept" method from Product and implements the Visitable
+// interface
 func (f *Fridge) Accept(v Visitor) {
 	v.Visit(f)
 }
@@ -110,7 +109,6 @@ func main() {
 	}
 
 	fmt.Printf("Total: %f\n", priceVisitor.Sum)
-
 
 	nameVisitor := &NamePrinter{}
 

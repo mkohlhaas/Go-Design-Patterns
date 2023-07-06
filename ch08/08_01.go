@@ -1,9 +1,9 @@
 package main
 
 func main() {
-  helloWorld()
+	helloWorld()
 }
 
-func helloWorld(){
-  println("Hello World!")
+func helloWorld() {
+	println("Hello World!")
 }

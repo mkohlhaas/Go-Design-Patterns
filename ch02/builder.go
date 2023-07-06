@@ -7,7 +7,7 @@ type BuildProcess interface {
 	GetVehicle() VehicleProduct
 }
 
-//Director
+// Director
 type ManufacturingDirector struct {
 	builder BuildProcess
 }
@@ -20,14 +20,14 @@ func (f *ManufacturingDirector) SetBuilder(b BuildProcess) {
 	f.builder = b
 }
 
-//Product
+// Product
 type VehicleProduct struct {
 	Wheels    int
 	Seats     int
 	Structure string
 }
 
-//A Builder of type car
+// A Builder of type car
 type CarBuilder struct {
 	v VehicleProduct
 }
@@ -51,7 +51,7 @@ func (c *CarBuilder) GetVehicle() VehicleProduct {
 	return c.v
 }
 
-//A Builder of type motorbike
+// A Builder of type motorbike
 type BikeBuilder struct {
 	v VehicleProduct
 }
@@ -75,7 +75,7 @@ func (b *BikeBuilder) GetVehicle() VehicleProduct {
 	return b.v
 }
 
-//A Builder of type motorbike
+// A Builder of type motorbike
 type BusBuilder struct {
 	v VehicleProduct
 }

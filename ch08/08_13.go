@@ -1,21 +1,21 @@
 package main
 
 import (
-  "fmt"
-  "time"
+	"fmt"
+	"time"
 )
 
 func main() {
-  channel := make(chan string, 1)
+	channel := make(chan string, 1)
 
-  go func() {
-    channel <- "Hello World! 1"
-    channel <- "Hello World! 2"
-    println("Finishing goroutine")
-  }()
+	go func() {
+		channel <- "Hello World! 1"
+		channel <- "Hello World! 2"
+		println("Finishing goroutine")
+	}()
 
-  time.Sleep(time.Second)
+	time.Sleep(time.Second)
 
-  message := <-channel
-  fmt.Println(message)
+	message := <-channel
+	fmt.Println(message)
 }
