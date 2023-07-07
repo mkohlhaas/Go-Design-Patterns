@@ -14,5 +14,4 @@ func main() {
 
 	fmt.Println("Variable 'explicit' is of type:", reflect.TypeOf(explicit))
 	fmt.Println("Variable 'inferred' is of type:", reflect.TypeOf(inferred))
-
 }

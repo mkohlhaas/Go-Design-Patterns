@@ -9,6 +9,6 @@ func TestSum(t *testing.T) {
 
 	res := sum(a, b)
 	if res != expected {
-		t.Errorf("Our sum function doens't work, %d+%d isn't %d\n", a, b, res)
+		t.Errorf("Our sum function doesn't work, %d+%d isn't %d\n", a, b, res)
 	}
 }

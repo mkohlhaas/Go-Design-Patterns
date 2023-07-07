@@ -35,16 +35,13 @@ func main() {
 
 	//Driving in Spain
 	spain := CountrySpain{}
-	fmt.Printf("I'm in Spain so I have to drive on the %s side\n",
-		d.GetSideToDrive(&spain))
+	fmt.Printf("I'm in Spain so I have to drive on the %s side.\n", d.GetSideToDrive(&spain))
 
 	//Travelled to England
 	england := CountryEngland{}
-	fmt.Printf("I'm in England now so I have to drive on the %s side\n",
-		d.GetSideToDrive(&england))
+	fmt.Printf("I'm in England now so I have to drive on the %s side.\n", d.GetSideToDrive(&england))
 
 	//Now by bike
 	c := Cyclist{}
-	fmt.Printf("I'm still in England and the side for bikes is: %s\n",
-		c.GetSideToRide(&england))
+	fmt.Printf("I'm still in England and the side for bikes is: %s.\n", c.GetSideToRide(&england))
 }

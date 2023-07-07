@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
+	_ "fmt"
 	_ "net/http/pprof"
-	"os"
-	"runtime"
+	_ "os"
+	_ "runtime"
+	"strings"
 )
 
 func (w *PreffixSuffixWorker) uppercase(in <-chan Request) <-chan Request {
