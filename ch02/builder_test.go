@@ -3,58 +3,57 @@ package creational
 import "testing"
 
 func TestBuilderPattern(t *testing.T) {
-	manufacturingComplex := ManufacturingDirector{}
+	t.Run("Car builder", func(t *testing.T) {
+		carBuilder := &CarBuilder{}
+		new(ManufacturingDirector).SetBuilder(carBuilder).Construct()
 
-	carBuilder := &CarBuilder{}
-	manufacturingComplex.SetBuilder(carBuilder)
-	manufacturingComplex.Construct()
+		car := carBuilder.GetVehicle()
 
-	car := carBuilder.GetVehicle()
+		assertWheels(t, "Car", 4, car.Wheels)
+		assertStructure(t, "Car", "Car", car.Structure)
+		assertSeats(t, "Car", 5, car.Seats)
+	})
 
-	if car.Wheels != 4 {
-		t.Errorf("Wheels on a car must be 4 and they were %d\n", car.Wheels)
+	t.Run("Bike Builder", func(t *testing.T) {
+		bikeBuilder := &BikeBuilder{}
+		new(ManufacturingDirector).SetBuilder(bikeBuilder).Construct()
+
+		motorbike := bikeBuilder.GetVehicle()
+
+		assertWheels(t, "Motorbike", 2, motorbike.Wheels)
+		assertStructure(t, "Motorbike", "Motorbike", motorbike.Structure)
+		assertSeats(t, "Motorbike", 2, motorbike.Seats)
+	})
+
+	t.Run("Bus Builder", func(t *testing.T) {
+		busBuilder := &BusBuilder{}
+		new(ManufacturingDirector).SetBuilder(busBuilder).Construct()
+
+		bus := busBuilder.GetVehicle()
+
+		assertWheels(t, "Bus", 8, bus.Wheels)
+		assertStructure(t, "Bus", "Bus", bus.Structure)
+		assertSeats(t, "Bus", 30, bus.Seats)
+	})
+}
+
+func assertWheels(t *testing.T, vehicle string, expected int, got int) {
+	t.Helper()
+	if expected != got {
+		t.Errorf("Wheels on a %s must be %d and they were %d.\n", vehicle, expected, got)
 	}
+}
 
-	if car.Structure != "Car" {
-		t.Errorf("Structure on a car must be 'Car' and was %s\n", car.Structure)
+func assertStructure(t *testing.T, vehicle string, expected string, got string) {
+	t.Helper()
+	if expected != got {
+		t.Errorf("Structure on a %s must be %s and they were %s.\n", vehicle, expected, got)
 	}
+}
 
-	if car.Seats != 5 {
-		t.Errorf("Seats on a car must be 5 and they were %d\n", car.Seats)
-	}
-
-	bikeBuilder := &BikeBuilder{}
-
-	manufacturingComplex.SetBuilder(bikeBuilder)
-	manufacturingComplex.Construct()
-
-	motorbike := bikeBuilder.GetVehicle()
-	motorbike.Seats = 1
-
-	if motorbike.Wheels != 2 {
-		t.Errorf("Wheels on a motorbike must be 2 and they were %d\n", motorbike.Wheels)
-	}
-
-	if motorbike.Structure != "Motorbike" {
-		t.Errorf("Structure on a motorbike must be 'Motorbike' and was %s\n", motorbike.Structure)
-	}
-
-	busBuilder := &BusBuilder{}
-
-	manufacturingComplex.SetBuilder(busBuilder)
-	manufacturingComplex.Construct()
-
-	bus := busBuilder.GetVehicle()
-
-	if bus.Wheels != 8 {
-		t.Errorf("Wheels on a bus must be 8 and they were %d\n", bus.Wheels)
-	}
-
-	if bus.Structure != "Bus" {
-		t.Errorf("Structure on a bus must be 'Bus' and was %s\n", bus.Structure)
-	}
-
-	if bus.Seats != 30 {
-		t.Errorf("Seats on a bus must be 30 and they were %d\n", bus.Seats)
+func assertSeats(t *testing.T, vehicle string, expected int, got int) {
+	t.Helper()
+	if expected != got {
+		t.Errorf("Seats on a %s must be %d and they were %d.\n", vehicle, expected, got)
 	}
 }

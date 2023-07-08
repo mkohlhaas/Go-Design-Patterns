@@ -5,53 +5,23 @@ import (
 	"fmt"
 )
 
-type ShirtCloner interface {
-	GetClone(m int) (ItemInfoGetter, error)
-}
+type Color int
 
 const (
-	White = 1
-	Black = 2
-	Blue  = 3
+	White Color = iota
+	Black
+	Blue
 )
-
-func GetShirtsCloner() ShirtCloner {
-	return nil
-}
-
-type ShirtsCache struct{}
-
-func (s *ShirtsCache) GetClone(m int) (ItemInfoGetter, error) {
-	switch m {
-	case White:
-		newItem := *whitePrototype
-		return &newItem, nil
-	case Black:
-		newItem := *blackPrototype
-		return &newItem, nil
-	case Blue:
-		newItem := *bluePrototype
-		return &newItem, nil
-	default:
-		return nil, errors.New("Shirt model not recognized")
-	}
-}
-
-type ItemInfoGetter interface {
-	GetInfo() string
-}
-
-type ShirtColor byte
 
 type Shirt struct {
 	Price float32
 	SKU   string
-	Color ShirtColor
+	Color Color
 }
 
-func (s *Shirt) GetInfo() string {
-	return fmt.Sprintf("Shirt with SKU '%s' and Color id %d that costs %f\n", s.SKU, s.Color, s.Price)
-}
+////////////////
+// Prototypes //
+////////////////
 
 var whitePrototype *Shirt = &Shirt{
 	Price: 15.00,
@@ -71,6 +41,36 @@ var bluePrototype *Shirt = &Shirt{
 	Color: Blue,
 }
 
-func (i *Shirt) GetPrice() float32 {
-	return i.Price
+type ItemInfoGetter interface {
+	GetInfo() string
+}
+
+func (s *Shirt) GetInfo() string {
+	return fmt.Sprintf("Shirt with SKU '%s' and Color id %d that costs %f\n", s.SKU, s.Color, s.Price)
+}
+
+type ShirtCloner interface {
+	GetClone(c Color) (ItemInfoGetter, error)
+}
+
+type ShirtsCache struct{}
+
+func (s *ShirtsCache) GetClone(c Color) (ItemInfoGetter, error) {
+	switch c {
+	case White:
+		newItem := *whitePrototype // Creates a new object, allocates memory (not just passing pointer)!!!
+		return &newItem, nil       // This is the whole trick!!!
+	case Black:
+		newItem := *blackPrototype
+		return &newItem, nil
+	case Blue:
+		newItem := *bluePrototype
+		return &newItem, nil
+	default:
+		return nil, errors.New("Shirt model not recognized")
+	}
+}
+
+func GetShirtsCloner() ShirtCloner {
+	return &ShirtsCache{}
 }

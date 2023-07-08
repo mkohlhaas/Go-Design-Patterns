@@ -1,50 +1,59 @@
 package creational
 
 import (
-	"errors"
 	"fmt"
 )
 
-// PaymentMethod defines a way of paying in the shop. This factory method returns
-// objects that implements this interface
+type Amount int
+type PaymentType int
+
+// PaymentMethod defines a way of paying in the shop.
 type PaymentMethod interface {
-	Pay(amount float32) string
+	Pay(amount Amount) string
 }
 
-// Our current implemented Payment methods are described here
+// Payment types
 const (
-	Cash      = 1
-	DebitCard = 2
+	Cash PaymentType = iota
+	DebitCard
 )
 
-// CreatePaymentMethod returns a pointer to a PaymentMethod object or an error
-// if the method is not registered. We used "new" operator to return the pointer
-// but we could also used &Type{} althought new makes it more readable for
-// newcomers could be confusing
-func GetPaymentMethod(m int) (PaymentMethod, error) {
-	switch m {
+// fmt.Stringer interface
+func (pt PaymentType) String() (result string) {
+	switch pt {
 	case Cash:
-		return new(CashPM), nil
+		result = "cash"
 	case DebitCard:
-		return new(NewDebitCardPM), nil
-	default:
-		return nil, errors.New(fmt.Sprintf("Payment method %d not recognized\n", m))
+		result = "debit card"
 	}
+	return
+}
+
+// We use "new" operator to return the pointer but we could also use &Type{}.
+func GetPaymentMethod(pt PaymentType) (result PaymentMethod) {
+	switch pt {
+	case Cash:
+		result = new(CashPM)
+	case DebitCard:
+		result = new(NewDebitCardPM)
+  default:
+    panic("Invalid payment type.")
+	}
+	return
 }
 
 type CashPM struct{}
 type DebitCardPM struct{}
-
-func (c *CashPM) Pay(amount float32) string {
-	return fmt.Sprintf("%0.2f payed using cash\n", amount)
-}
-
-func (c *DebitCardPM) Pay(amount float32) string {
-	return fmt.Sprintf("%#0.2f payed using debit card\n", amount)
-}
-
 type NewDebitCardPM struct{}
 
-func (d *NewDebitCardPM) Pay(amount float32) string {
-	return fmt.Sprintf("%#0.2f payed using debit card (new)\n", amount)
+func (c *CashPM) Pay(amount Amount) string {
+	return fmt.Sprintf("%d payed using cash.\n", amount)
+}
+
+func (c *DebitCardPM) Pay(amount Amount) string {
+	return fmt.Sprintf("%d payed using debit card.\n", amount)
+}
+
+func (d *NewDebitCardPM) Pay(amount Amount) string {
+	return fmt.Sprintf("%d payed using debit card (new).\n", amount)
 }

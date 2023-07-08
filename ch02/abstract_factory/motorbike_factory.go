@@ -5,20 +5,22 @@ import (
 	"fmt"
 )
 
+type MotorbikeType int
+
 const (
-	SportMotorbikeType  = 1
-	CruiseMotorbikeType = 2
+	SportMotorbikeType MotorbikeType = iota
+	CruiseMotorbikeType
 )
 
 type MotorbikeFactory struct{}
 
-func (m *MotorbikeFactory) GetVehicle(v int) (Vehicle, error) {
-	switch v {
+func (m *MotorbikeFactory) GetVehicle(mt MotorbikeType) (Vehicle, error) {
+	switch mt {
 	case SportMotorbikeType:
 		return new(SportMotorbike), nil
 	case CruiseMotorbikeType:
 		return new(CruiseMotorbike), nil
 	default:
-		return nil, errors.New(fmt.Sprintf("Vehicle of type %d not recognized\n", v))
+		return nil, errors.New(fmt.Sprintf("Vehicle of type %d not recognized\n", mt))
 	}
 }
