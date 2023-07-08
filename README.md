@@ -4,4 +4,4 @@ This is the code repository for [Go Design Patterns](https://www.packtpub.com/pr
 ![Cover Image](img/go_design_patterns.jpg)
 
 - Code is too messy and partially even wrong. Superficial explanations. Not recommended.
-- Better use [All Design Pattern in Go](https://golangbyexample.com/all-design-patterns-golang/)
+- Better use [All Design Pattern in Go](https://golangbyexample.com/all-design-patterns-golang/).

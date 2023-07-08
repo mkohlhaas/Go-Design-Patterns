@@ -2,8 +2,7 @@ package arithmetic
 
 import "errors"
 
-// Sum will take as many arguments as you pass to it and return the sum of all
-// of them
+// Sum will take as many arguments as you pass to it and return the sum of all of them.
 func Sum(args ...int) (res int) {
 	for _, v := range args {
 		res += v
@@ -12,8 +11,7 @@ func Sum(args ...int) (res int) {
 	return
 }
 
-// Subtract will take as many arguments as you pass to it and return the
-// subtraction of them
+// Subtract will take as many arguments as you pass to it and return the subtraction of them.
 func Subtract(args ...int) int {
 	if len(args) < 2 {
 		return 0
@@ -27,8 +25,7 @@ func Subtract(args ...int) int {
 	return res
 }
 
-// Multiply will take as many arguments as you want and will return the
-// multiplication of them
+// Multiply will take as many arguments as you want and will return the multiplication of them.
 func Multiply(args ...int) int {
 	if len(args) < 2 {
 		return 0
@@ -42,8 +39,7 @@ func Multiply(args ...int) int {
 	return res
 }
 
-// Divide will take two arguments and return its division as far as the second
-// argument isn't zero that will return an error
+// Divide will take two arguments and return its division as far as the second argument isn't zero that will return an error.
 func Divide(a, b int) (float64, error) {
 	if b == 0 {
 		return 0, errors.New("You cannot divide by zero")

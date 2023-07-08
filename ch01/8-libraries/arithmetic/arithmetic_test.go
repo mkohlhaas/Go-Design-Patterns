@@ -8,6 +8,7 @@ func TestArithmeticSum(t *testing.T) {
 	expected := 11
 
 	res := Sum(a, b)
+
 	if res != expected {
 		t.Errorf("%d+%d isn't %d.\n", a, b, res)
 	}
